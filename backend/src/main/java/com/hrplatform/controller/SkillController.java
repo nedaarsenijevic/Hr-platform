@@ -25,14 +25,12 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    // Dodaj vestinu
     @PostMapping
     public ResponseEntity<Skill> addSkill(@RequestBody Skill skill) {
         Skill saved = skillService.addSkill(skill);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    // Azuriraj vestinu
     @PutMapping("/{id}")
     public ResponseEntity<Skill> updateSkill(@PathVariable Long id,
                                               @RequestBody Skill skill) {
@@ -40,35 +38,30 @@ public class SkillController {
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
-    // Obrisi vestinu
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSkill(@PathVariable Long id) {
         skillService.deleteSkill(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // Sve vestine
     @GetMapping
     public ResponseEntity<List<Skill>> getAllSkills() {
         List<Skill> skills = skillService.getAllSkills();
         return new ResponseEntity<>(skills, HttpStatus.OK);
     }
 
-    // Pronadji vestinu po id
     @GetMapping("/{id}")
     public ResponseEntity<Skill> getSkillById(@PathVariable Long id) {
         Skill skill = skillService.getSkillById(id);
         return new ResponseEntity<>(skill, HttpStatus.OK);
     }
 
-    // Pretraga po imenu
     @GetMapping("/search")
     public ResponseEntity<List<Skill>> searchByName(@RequestParam String name) {
         List<Skill> skills = skillService.searchByName(name);
         return new ResponseEntity<>(skills, HttpStatus.OK);
     }
 
-    // Pretraga po kategoriji
     @GetMapping("/category")
     public ResponseEntity<List<Skill>> searchByCategory(@RequestParam String categoryName) {
         List<Skill> skills = skillService.searchByCategory(categoryName);

@@ -19,16 +19,12 @@ public class SearchByNameStrategy implements SearchStrategy {
     public List<Candidate> search(String keyword) {
         List<Candidate> result = new ArrayList<>();
 
-        // Pretraga po imenu
         result.addAll(candidateRepository.findByFirstNameContainingIgnoreCase(keyword));
 
-        // Pretraga po prezimenu
         result.addAll(candidateRepository.findByLastNameContainingIgnoreCase(keyword));
 
-        // Pretraga po punom imenu
         result.addAll(candidateRepository.findByFullNameContainingIgnoreCase(keyword));
 
-        //return result;
         return result.stream().distinct().toList();
     }
 }

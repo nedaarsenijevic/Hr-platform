@@ -17,13 +17,6 @@ const Categories = () => {
     getAllCategories().then(res => setCategories(res.data));
   };
 
-  // const handleSaveCategory = () => {
-  //   addCategory({ name: categoryName }).then(() => {
-  //     loadCategories();
-  //     setIsAddOpen(false);
-  //     setCategoryName('');
-  //   });
-  // };
   const handleSaveCategory = () => {
   addCategory({ name: categoryName })
     .then(() => {

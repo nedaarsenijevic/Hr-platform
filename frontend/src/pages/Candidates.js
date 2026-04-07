@@ -115,17 +115,9 @@ const handleSaveCandidate = () => {
     setIsManageSkillsOpen(true);
   };
 
-  // const handleAddSkill = (skillId) => {
-  //   addSkillToCandidate(managingCandidate.id, skillId).then(() => loadCandidates());
-  // };
-
-  // const handleRemoveSkill = (skillId) => {
-  //   removeSkillFromCandidate(managingCandidate.id, skillId).then(() => loadCandidates());
-  // };
     const handleAddSkill = (skillId) => {
     addSkillToCandidate(managingCandidate.id, skillId).then(() => {
       loadCandidates();
-      // Azuriraj i managingCandidate
       setManagingCandidate(prev => ({
         ...prev,
         skills: [...(prev.skills || []), skills.find(s => s.id === skillId)]
@@ -136,7 +128,6 @@ const handleSaveCandidate = () => {
   const handleRemoveSkill = (skillId) => {
     removeSkillFromCandidate(managingCandidate.id, skillId).then(() => {
       loadCandidates();
-      // Azuriraj i managingCandidate
       setManagingCandidate(prev => ({
         ...prev,
         skills: (prev.skills || []).filter(s => s.id !== skillId)

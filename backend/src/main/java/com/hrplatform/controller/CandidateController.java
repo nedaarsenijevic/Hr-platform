@@ -25,14 +25,12 @@ public class CandidateController {
     @Autowired
     private CandidateService candidateService;
 
-    // Dodaj kandidata
     @PostMapping
     public ResponseEntity<Candidate> addCandidate(@RequestBody Candidate candidate) {
         Candidate saved = candidateService.addCandidate(candidate);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    // Azuriraj kandidata
     @PutMapping("/{id}")
     public ResponseEntity<Candidate> updateCandidate(@PathVariable Long id,
                                                       @RequestBody Candidate candidate) {
@@ -40,14 +38,12 @@ public class CandidateController {
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
-    // Obrisi kandidata
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCandidate(@PathVariable Long id) {
         candidateService.deleteCandidate(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // Dodaj vestinu kandidatu
     @PostMapping("/{candidateId}/skills/{skillId}")
     public ResponseEntity<Candidate> addSkillToCandidate(@PathVariable Long candidateId,
                                                           @PathVariable Long skillId) {
@@ -55,7 +51,6 @@ public class CandidateController {
         return new ResponseEntity<>(candidate, HttpStatus.OK);
     }
 
-    // Ukloni vestinu sa kandidata
     @DeleteMapping("/{candidateId}/skills/{skillId}")
     public ResponseEntity<Candidate> removeSkillFromCandidate(@PathVariable Long candidateId,
                                                                @PathVariable Long skillId) {
@@ -63,35 +58,30 @@ public class CandidateController {
         return new ResponseEntity<>(candidate, HttpStatus.OK);
     }
 
-    // Svi kandidati
     @GetMapping
     public ResponseEntity<List<Candidate>> getAllCandidates() {
         List<Candidate> candidates = candidateService.getAllCandidates();
         return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
 
-    // Pronadji kandidata po id
     @GetMapping("/{id}")
     public ResponseEntity<Candidate> getCandidateById(@PathVariable Long id) {
         Candidate candidate = candidateService.getCandidateById(id);
         return new ResponseEntity<>(candidate, HttpStatus.OK);
     }
 
-    // Pretraga po imenu - koristi SearchByNameStrategy
     @GetMapping("/search/name")
     public ResponseEntity<List<Candidate>> searchByName(@RequestParam String name) {
         List<Candidate> candidates = candidateService.searchByName(name);
         return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
 
-    // Pretraga po vestini - koristi SearchBySkillStrategy
     @GetMapping("/search/skill")
     public ResponseEntity<List<Candidate>> searchBySkill(@RequestParam String skillName) {
         List<Candidate> candidates = candidateService.searchBySkill(skillName);
         return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
 
-    // Pretraga po emailu
     @GetMapping("/search/email")
     public ResponseEntity<List<Candidate>> searchByEmail(@RequestParam String email) {
         List<Candidate> candidates = candidateService.searchByEmail(email);
